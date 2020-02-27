@@ -77,7 +77,10 @@ const FormikForm = withFormik({
 
     handleSubmit: (values, bag) => {
         console.log('values', values);
-        axios.post('https://reqres.in/api/users', values).then(res => console.log('response', res.data)).catch(err => console.log(err))
+        axios.post('https://reqres.in/api/users', values).then(res => {
+            console.log('res.data:', res.data);
+            bag.props.setMembers([...bag.props.members, res.data]);
+        }).catch(err => console.log(err))
         bag.resetForm();
     }
 
